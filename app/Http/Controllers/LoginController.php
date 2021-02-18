@@ -5,8 +5,8 @@ use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Request;
 use App\User;
-use Validator;
-use Hash;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Hash;
 use Session;
 
 class LoginController extends Controller
@@ -37,12 +37,12 @@ class LoginController extends Controller
                 return $this->redirectTo;
                     break;
             }
-           
+
         }
 
         return view('login');
     }
-    
+
 
     public function loginStore(Request $request)
     {
@@ -50,63 +50,44 @@ class LoginController extends Controller
             'username'                 => 'required',
             'password'              => 'required|string'
         ];
- 
+
         $messages = [
             'username.required'        => 'Username wajib diisi',
             'password.required'     => 'Password wajib diisi',
             'password.string'       => 'Password harus berupa string'
         ];
- 
+
         $validator = Validator::make($request->all(), $rules, $messages);
- 
+
         if($validator->fails()){
             return redirect()->back()->withErrors($validator)->withInput($request->all);
         }
- 
+
         $data = [
             'username'     => $request->input('username'),
             'password'  => $request->input('password'),
         ];
- 
+
         Auth::attempt($data);
 
-        if (Auth::check()) { // true sekalian session field di users nanti bisa dipanggil via Auth
-            //Login Success
+
+        if(Auth::attempt(array('username' => $data['username'], 'password' => $data['password'])))
+            {
+                //Cek Auth->level apa yang lagi aktive
             if (Auth::user()->level == "admin") {
-                return redirect()->route('admin.dashboard')->with('success','Login Berhasil');;
+                return redirect()
+                        ->route('admin.dashboard')
+                            ->with('success','Login Berhasil');
             }elseif (Auth::user()->level == "user") {
-                return redirect()->route('user.dashboard');
-            }else {
-                return redirect()->route('login');
+                return redirect()
+                        ->route('user.dashboard')
+                            ->with('success','Login Berhasil');
             }
-        }
-    //     if(auth()->attempt(array('username' => $data['username'], 'password' => $data['password'])))
-    //         {
+            }else{
+                return redirect()->route('login')
+                    ->with('error','Username And Password Are Wrong.');
+            }
 
-
-    // //     if ($guard == 'admin') {
-    // //         if (Auth::guard($guard)->check()) {
-    // //                return redirect('/admin/index');
-    // //         }
-    // //    }else if($guard == 'siswa') {
-    // //         if (Auth::guard($guard)->check()) {
-    // //                return redirect('/siswa/index');
-    // //         }
-    // //    }else{
-    // //        if (Auth::guard($guard)->check()) {
-    // //     return redirect('/loginShow');
-    // //         }
-
-    //         //     if (auth()->user()->level == 'admin') {
-    //         //         return redirect()->route('admin.dashboard');
-    //         //     }else if (auth()->user()->level == 2){
-    //         //         return redirect()->route('siswa.index');
-    //         //     }
-    //         // }else{
-    //         //     return redirect()->route('login')
-    //         //         ->with('error','Email-Address And Password Are Wrong.');
-    //         // }
-            
     }
 
     public function logout()
