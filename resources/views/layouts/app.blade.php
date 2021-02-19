@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="{{ asset('vendors/base/vendor.bundle.base.css') }}">
     <!-- endinject -->
     <!-- plugin css for this page -->
+    <link rel="stylesheet" href="{{ asset('vendors/select2/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('vendors/select2-bootstrap-theme/select2-bootstrap.min.css') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/npm/sweetalert2@10/dist/sweetalert2.min.css,npm/sweetalert2@10/dist/sweetalert2.min.css">
     <!-- End plugin css for this page -->
     <!-- inject:css -->
@@ -110,7 +112,7 @@
                     </div>
                     <input type="text" class="form-control" placeholder="search" aria-label="search" aria-describedby="search">
                 </div>
-              </li>	
+              </li>
             </ul>
             <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
                 <a class="navbar-brand brand-logo" href="index.html"><img src="{{ asset('images/logo.svg') }}" alt="logo"/></a>
@@ -185,34 +187,8 @@
                       </ul>
                   </div>
               </li>
-              <li class="nav-item">
-                  <a href="" class="nav-link">
-                    <i class="mdi mdi-chart-areaspline menu-icon"></i>
-                    <span class="menu-title">Form Elements</span>
-                    <i class="menu-arrow"></i>
-                  </a>
-              </li>
-              <li class="nav-item">
-                  <a href="pages/charts/chartjs.html" class="nav-link">
-                    <i class="mdi mdi-finance menu-icon"></i>
-                    <span class="menu-title">Charts</span>
-                    <i class="menu-arrow"></i>
-                  </a>
-              </li>
-              <li class="nav-item">
-                  <a href="pages/tables/basic-table.html" class="nav-link">
-                    <i class="mdi mdi-grid menu-icon"></i>
-                    <span class="menu-title">Tables</span>
-                    <i class="menu-arrow"></i>
-                  </a>
-              </li>
-              <li class="nav-item">
-                  <a href="pages/icons/mdi.html" class="nav-link">
-                    <i class="mdi mdi-emoticon menu-icon"></i>
-                    <span class="menu-title">Icons</span>
-                    <i class="menu-arrow"></i>
-                  </a>
-              </li>
+
+
               <li class="nav-item">
                   <a href="#" class="nav-link">
                     <i class="mdi mdi-codepen menu-icon"></i>
@@ -221,7 +197,7 @@
                   </a>
                   <div class="submenu">
                       <ul class="submenu-item">
-                
+
                           <li class="nav-item"><a class="nav-link" href="pages/samples/register-2.html">Register 2</a></li>
                           <li class="nav-item"><a class="nav-link" href="pages/samples/lock-screen.html">Lockscreen</a></li>
                       </ul>
@@ -276,6 +252,13 @@
 		<script src="{{ asset('vendors/justgage/justgage.js') }}"></script>
     <!-- Custom js for this page-->
     <script src="{{ asset('js/dashboard.js') }}"></script>
+
+    <script src="{{ asset('js/file-upload.js') }}"></script>
+    <script src="{{ asset('js/typeahead.js') }}"></script>
+    <script src="{{ asset('js/select2.js') }}"></script>
+
+    <script src="{{ asset('vendors/typeahead.js/typeahead.bundle.min.js') }}"></script>
+    <script src="{{ asset('vendors/select2/select2.min.js') }}"></script>
     <!-- End custom js for this page-->
     <script src="https://cdn.jsdelivr.net/combine/npm/sweetalert2@10,npm/sweetalert2@10/dist/sweetalert2.all.min.js,npm/sweetalert2@10/dist/sweetalert2.min.js,npm/sweetalert2@10/dist/sweetalert2.min.js"></script>
 <script>
