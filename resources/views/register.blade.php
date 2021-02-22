@@ -26,7 +26,7 @@
 										<strong>Something it's wrong!</strong> You should check in on some of those fields below.
 										<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 											<span aria-hidden="true">&times;</span>
-										</button>					
+										</button>
 										<ul>
 											@foreach ($errors->all() as $error)
 											<li>{{ $error }}</li>
@@ -36,24 +36,25 @@
 									@endif
 								<div class="form-group">
 									<label for="name">Name</label>
-									<input id="name" type="text" class="form-control" @error('name') is-invalid @enderror" name="name" required autofocus>
-									<div class="invalid-feedback">
-										What's your name?
+									<input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" required autofocus>
+                                    <div class="invalid-feedback">
+										Your email is invalid
 									</div>
+
 								</div>
 
 								<div class="form-group">
 									<label for="email">E-Mail Address</label>
-									<input id="email" type="email" class="form-control"  @error('email') is-invalid @enderror" name="email" required>
+									<input id="email" type="email" class="form-control  @error('email') is-invalid @enderror" name="email" required>
 									<div class="invalid-feedback">
 										Your email is invalid
 									</div>
 								</div>
 								<div class="form-group">
 									<label for="username">Username</label>
-									<input id="username" type="text" class="form-control" @error('username') is-invalid @enderror" name="username" required>
+									<input id="username" type="text" class="form-control @error('username') is-invalid @enderror" name="username" required autocomplete="username">
 									<div class="invalid-feedback">
-										Your email is invalid
+										Your username is invalid
 									</div>
 								</div>
 
@@ -94,7 +95,7 @@
 						</div>
 					</div>
 					<div class="footer">
-						Copyright &copy; 2017 &mdash; Your Company 
+						Copyright &copy; 2017 &mdash; Your Company
 					</div>
 				</div>
 			</div>

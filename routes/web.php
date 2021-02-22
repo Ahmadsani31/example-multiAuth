@@ -13,10 +13,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-//   dd(Auth::user()->level);
-    return view('login');
-});
+// Route::get('/', function () {
+// //   dd(Auth::user()->level);
+//     return view('login');
+// });
+
+Route::get('/','AuthControler@wellcome')->name('login');
 
 Route::get('/register', function () {
     return view('register');
@@ -31,11 +33,16 @@ Route::post('registerStore','RegisterController@registerStore')->name('registerS
 
 Route::get('logout', 'LoginController@logout')->name('logout');
 
-Route::get('admin/home','AdminController@home')->name('admin.home');
+
 
 Route::middleware('admin')->group(function () {
-    Route::get('admin/dashboard','AdminController@index')->name('admin.dashboard');
+    Route::get('/admin/dashboard','AdminController@index')->name('admin.dashboard');
+    Route::get('/siswa','SiswaController@index')->name('siswa');
+    Route::post('/siswa','SiswaController@store')->name('siswa.store');
 
+    Route::delete('siswa/{siswa}/delete','SiswaController@destroy')->name('siswa.delete');
+    Route::get('/siswa/{id}/edit','SiswaController@edit')->name('siswa.edit');
+    Route::PATCH('/siswa/{id}/update', 'SiswaController@update')->name('siswa.update');
 });
 
 Route::middleware('user')->group(function () {

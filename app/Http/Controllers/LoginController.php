@@ -7,10 +7,17 @@ use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
-use Session;
+use Illuminate\Support\Facades\Session;
 
 class LoginController extends Controller
 {
+
+    // public function __construct()
+    // {
+    //     $this->middleware('guest:admin')->except('postLogout');
+    //     $this->middleware('guest:user')->except('logoutUser');
+    // }
+
     public function loginShow()
     {
         if (Auth::check()) { // true sekalian session field di users nanti bisa dipanggil via Auth

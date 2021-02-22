@@ -4,7 +4,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Kapella Bootstrap Admin Dashboard Template</title>
+    <title>Admin Dashboard</title>
     <!-- base:css -->
     <link rel="stylesheet" href="{{ asset('vendors/mdi/css/materialdesignicons.min.css') }}">
     <link rel="stylesheet" href="{{ asset('vendors/base/vendor.bundle.base.css') }}">
@@ -13,7 +13,17 @@
     <link rel="stylesheet" href="{{ asset('vendors/select2/select2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('vendors/select2-bootstrap-theme/select2-bootstrap.min.css') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/npm/sweetalert2@10/dist/sweetalert2.min.css,npm/sweetalert2@10/dist/sweetalert2.min.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" integrity="sha512-mSYUmp1HYZDFaVKK//63EcZq4iFWFjxSL+Z3T/aCt4IO9Cejm03q3NKKYN6pFQzY0SBOr8h+eCIAZHPXcpZaNw==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.standalone.min.css" integrity="sha512-TQQ3J4WkE/rwojNFo6OJdyu6G8Xe9z8rMrlF9y7xpFbQfW5g8aSWcygCQ4vqRiJqFsDsE1T6MoAOMJkFXlrI9A==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker3.min.css" integrity="sha512-rxThY3LYIfYsVCWPCW9dB0k+e3RZB39f23ylUYTEuZMDrN/vRqLdaCBo/FbvVT6uC2r0ObfPzotsfKF9Qc5W5g==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker3.standalone.min.css" integrity="sha512-p4vIrJ1mDmOVghNMM4YsWxm0ELMJ/T0IkdEvrkNHIcgFsSzDi/fV7YxzTzb3mnMvFPawuIyIrHcpxClauEfpQg==" crossorigin="anonymous" />
     <!-- End plugin css for this page -->
+
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script src="https://cdn.datatables.net/r/bs-3.3.5/jqc-1.11.3,dt-1.10.8/datatables.min.js"></script>
+
     <!-- inject:css -->
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <!-- endinject -->
@@ -152,9 +162,8 @@
                         <i class="mdi mdi-settings text-primary"></i>
                         Settings
                       </a>
-                      <a href="{{ route('logout') }}" class="dropdown-item swal-logout">
-                        <i class="mdi mdi-logout text-primary"></i>
-                        Logout
+                      <a href="{{ route('logout') }}" class="dropdown-item">
+                        <i class="mdi mdi-logout text-primary"></i>Logout
                       </a>
                   </div>
                 </li>
@@ -182,7 +191,7 @@
                   </a>
                   <div class="submenu">
                       <ul>
-                          <li class="nav-item"><a class="nav-link" href="{{ route('admin.home') }}">Buttons</a></li>
+                          <li class="nav-item"><a class="nav-link" href="{{ route('siswa') }}">Buttons</a></li>
                           <li class="nav-item"><a class="nav-link" href="pages/ui-features/typography.html">Typography</a></li>
                       </ul>
                   </div>
@@ -259,9 +268,26 @@
 
     <script src="{{ asset('vendors/typeahead.js/typeahead.bundle.min.js') }}"></script>
     <script src="{{ asset('vendors/select2/select2.min.js') }}"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ==" crossorigin="anonymous"></script>
     <!-- End custom js for this page-->
+    @include('sweetalert::alert');
+
+
     <script src="https://cdn.jsdelivr.net/combine/npm/sweetalert2@10,npm/sweetalert2@10/dist/sweetalert2.all.min.js,npm/sweetalert2@10/dist/sweetalert2.min.js,npm/sweetalert2@10/dist/sweetalert2.min.js"></script>
 <script>
+
+$(function(){
+  $(".datepicker").datepicker({
+      autoclose: true,
+      todayHighlight: true,
+  });
+ });
+
+
   $(".swal-confirm").click(function(e){
 	Swal.fire({
 	title: 'Are you sure?',
@@ -292,37 +318,44 @@
   }
 });
 });
-$(".swal-logout").click(function(e){
-	Swal.fire({
-	title: 'Are you sure logout?',
-  text: "You won't be able to revert this!",
-  icon: 'warning',
-  showDenyButton: true,
-  showCancelButton: false,
-  confirmButtonText: `Delete`,
-  denyButtonText: `Cancel`,
-}).then((result) => {
-  /* Read more about isConfirmed, isDenied below */
-  if (result.isConfirmed) {
-    Swal.fire({
-		icon: 'success',
-		title: 'Deleted',
-		text: 'Your file has been deleted.',
-		showConfirmButton: false,
-		timer: 1000
-	})
-  } else if (result.isDenied) {
-    Swal.fire({
-		icon: 'error',
-		title: 'Cancelled',
-		text: 'Your imaginary file is safe :)',
-		showConfirmButton: false,
-		timer: 1000
-	})
-  }
-});
-});
 
+$('.btn-edit').on('click', function(){
+    // console.log($(this).data('id'));
+    var id = $(this).data('id');
+
+    $.ajax({
+        url:"siswa" +'/'+ id +'/edit',
+        method:"GET",
+            success: function(data){
+                console.log(data)
+                $('#modal-edit').find('.modal-body').html(data)
+                $('#modal-edit').modal('show')
+            },
+            error: function(data){
+                console.log('Error:', data);
+            }
+    })
+})
+$('.btn-update').on('click', function(){
+   // console.log($(this).data('id'));
+    var id = $('#form-edit').find('#id_siswa').val()
+    var formData = $('#form-edit').serialize()
+    // console.log(formData);
+    $.ajax({
+        url:"siswa" +'/'+ id +'/update',
+        method:"PATCH",
+        data:formData,
+            success: function(data){
+            //     console.log(data)
+            //     $('#modal-edit').find('.modal-body').html(data)
+                $('#modal-edit').modal('hide')
+                window.location.assign('/siswa')
+            },
+            error: function(data){
+                console.log('Error:', data);
+            }
+    })
+})
 
 </script>
 @if (Session::has('success'))
